@@ -47,4 +47,17 @@ public class MainActivity extends AppCompatActivity {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
     }
+    /**
+     * Nuevo Metodo de incremento y decremento
+     */
+    public void increment(View view) {
+        int numeroIncremento = 3;
+        display(numeroIncremento);
+    }
+
+    public void decrement(View view) {
+        int numeroDecremento = 1;
+        display(numeroDecremento);
+    }
+
 }
