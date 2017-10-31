@@ -50,14 +50,15 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Nuevo Metodo de incremento y decremento
      */
+    int cantidad = 0;
     public void increment(View view) {
-        int numeroIncremento = 3;
-        display(numeroIncremento);
+        cantidad =  cantidad+1;
+        display(cantidad);
     }
 
     public void decrement(View view) {
-        int numeroDecremento = 1;
-        display(numeroDecremento);
+        cantidad = cantidad -1;
+        display(cantidad);
     }
 
 }
