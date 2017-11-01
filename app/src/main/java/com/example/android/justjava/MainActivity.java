@@ -26,10 +26,26 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * This method is called when the order button is clicked.
-     */
+     *
     public void submitOrder(View view) {
         int numberOfCoffees = cantidad;
         displayPrice(numberOfCoffees * 5);
+    }
+    */
+
+    /* Agregado nuevo metodo experimental con strings */
+    public void submitOrder(View view) {
+        String priceMessage = "Amount Due $" + (5*cantidad);
+        priceMessage = priceMessage + "\nThank you!";
+        displayMessage(priceMessage);
+    }
+
+    /**
+     * This method displays the given text on the screen.
+     */
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
     }
 
     /**
@@ -59,5 +75,6 @@ public class MainActivity extends AppCompatActivity {
         cantidad = cantidad -1;
         display(cantidad);
     }
+
 
 }
