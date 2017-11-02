@@ -7,16 +7,20 @@
  *
  */
 
-package com.example.android.justjava;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
-import java.text.NumberFormat;
+        package com.example.android.justjava;
+        import android.os.Bundle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.view.View;
+        import android.widget.TextView;
+        import java.text.NumberFormat;
 /**
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
+
+
+    int precioFinal = 0;
+    int precioTotal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /**
-     * This method is called when the order button is clicked.
-     *
-    public void submitOrder(View view) {
-        int numberOfCoffees = cantidad;
-        displayPrice(numberOfCoffees * 5);
-    }
-    */
-
     /* Agregado nuevo metodo experimental con strings */
     public void submitOrder(View view) {
-        String priceMessage = "Amount Due $" + (5*cantidad);
-        priceMessage = priceMessage + "\nThank you!";
-        displayMessage(priceMessage);
+        int precioPorVaso = 5;
+        String CadenaFinal;
+        precioFinal = obtenerPrecio(cantidad,precioPorVaso);
+        CadenaFinal = createOrderSummary(precioFinal);
+        displayMessage(CadenaFinal);
     }
 
     /**
@@ -51,30 +48,42 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
-    /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
+
     /**
      * Nuevo Metodo de incremento y decremento
      */
     int cantidad = 0;
     public void increment(View view) {
-        cantidad =  cantidad+1;
-        display(cantidad);
+        cantidad =  cantidad + 1;
+        displayQuantity(cantidad);
     }
 
     public void decrement(View view) {
-        cantidad = cantidad -1;
-        display(cantidad);
+        cantidad = cantidad - 1;
+        displayQuantity(cantidad);
     }
 
+    /**
+     * Nuevo metodo para calcular el precio del total
+     */
+    private int obtenerPrecio(int cantidad, int precioPorVaso) {
+        precioTotal = cantidad * precioPorVaso;
+        return precioTotal;
+    }
 
+    /**
+     * Metodo para desplegar el resumen de la orden
+     *
+     */
+    public String createOrderSummary(int precioFinal) {
+        String name = "Name: Kaptain Kunal";
+        String quantityDesplegada = "Quantity: 3";
+        String precio_interno = "Total $" + precioFinal;
+        String priceMessage = name + "\n" + quantityDesplegada + "\n" + precio_interno + "\nThank you!";
+        return priceMessage;
+    }
 }
