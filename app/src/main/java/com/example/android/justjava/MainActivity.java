@@ -82,16 +82,19 @@ public class MainActivity extends AppCompatActivity {
      *
      */
     public String createOrderSummary(int precioFinal) {
-        Boolean estadoWhipped = getCheckedState();
+        Boolean estadoWhipped = getCheckedState("Whipped_cream_checkbox");
+        Boolean estadoChocolate = getCheckedState("chocolate_checkbox");
         String name = "Name: Kaptain Kunal";
         String toppings = "Add whipped cream? " + estadoWhipped;
+        String toppings2 = "Add whipped chocolate? " + estadoChocolate;
         String quantityDesplegada = "Quantity: " + cantidad;
         String precio_interno = "Total $" + precioFinal;
-        String priceMessage = name + "\n" + toppings + "\n" + quantityDesplegada + "\n" + precio_interno + "\nThank you!";
+        String priceMessage = name + "\n" + toppings + "\n"
+                + toppings2 +"\n"  + quantityDesplegada + "\n" + precio_interno + "\nThank you!";
         return priceMessage;
     }
-    public boolean getCheckedState (){
-        CheckBox EstadoChecked = (CheckBox) findViewById(R.id.Whipped_cream_checkbox);
+    public boolean getCheckedState (String idCheckbox){
+        CheckBox EstadoChecked = (CheckBox) findViewById(getResources().getIdentifier(idCheckbox, "id", getPackageName()));
         boolean estadoWhipped = EstadoChecked.isChecked();
         return estadoWhipped;
     }
