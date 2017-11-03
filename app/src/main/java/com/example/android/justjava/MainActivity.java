@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     int precioFinal = 0;
     int precioTotal = 0;
+    boolean estadoWhipped ;
+    boolean estadoChocolate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     /* Agregado nuevo metodo experimental con strings */
     public void submitOrder(View view) {
-        int precioPorVaso = 5;
         String CadenaFinal;
-        precioFinal = obtenerPrecio(cantidad,precioPorVaso);
         CadenaFinal = createOrderSummary(precioFinal);
         displayMessage(CadenaFinal);
     }
@@ -75,7 +75,20 @@ public class MainActivity extends AppCompatActivity {
      * Nuevo metodo para calcular el precio del total
      */
     private int obtenerPrecio(int cantidad, int precioPorVaso) {
-        precioTotal = cantidad * precioPorVaso;
+        int multiplicadorWhipped;
+        int multiplicadorChocolate;
+
+        if (estadoWhipped) {
+         multiplicadorWhipped = 1 * cantidad;
+        } else {
+            multiplicadorWhipped = 0;
+        }
+        if (estadoChocolate) {
+            multiplicadorChocolate = 2 * cantidad;
+        } else {
+            multiplicadorChocolate = 0;
+        }
+        precioTotal = (cantidad * precioPorVaso) + multiplicadorWhipped  + multiplicadorChocolate;
         return precioTotal;
     }
 
@@ -84,8 +97,10 @@ public class MainActivity extends AppCompatActivity {
      *
      */
     public String createOrderSummary(int precioFinal) {
-        Boolean estadoWhipped = getCheckedState("Whipped_cream_checkbox");
-        Boolean estadoChocolate = getCheckedState("chocolate_checkbox");
+        int precioPorVaso = 5;
+        estadoWhipped = getCheckedState("Whipped_cream_checkbox");
+        estadoChocolate = getCheckedState("chocolate_checkbox");
+        precioFinal = obtenerPrecio(cantidad,precioPorVaso);
         EditText textoNombre = (EditText) findViewById(getResources().getIdentifier("Nombre_Persona",
                 "id", getPackageName()));
         Editable name = textoNombre.getText();
