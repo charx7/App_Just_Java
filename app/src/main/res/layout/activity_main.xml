@@ -9,6 +9,13 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/Nombre_Persona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="textMultiLine"
+            android:layout_marginLeft="10dp"/>
         <TextView
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"

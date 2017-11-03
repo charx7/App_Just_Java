@@ -10,9 +10,11 @@
         package com.example.android.justjava;
         import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
+        import android.text.Editable;
         import android.view.View;
         import android.widget.CheckBox;
         import android.widget.Checkable;
+        import android.widget.EditText;
         import android.widget.TextView;
         import java.text.NumberFormat;
 /**
@@ -84,12 +86,15 @@ public class MainActivity extends AppCompatActivity {
     public String createOrderSummary(int precioFinal) {
         Boolean estadoWhipped = getCheckedState("Whipped_cream_checkbox");
         Boolean estadoChocolate = getCheckedState("chocolate_checkbox");
-        String name = "Name: Kaptain Kunal";
+        EditText textoNombre = (EditText) findViewById(getResources().getIdentifier("Nombre_Persona",
+                "id", getPackageName()));
+        Editable name = textoNombre.getText();
+        String nombre = "Name: " + name;
         String toppings = "Add whipped cream? " + estadoWhipped;
         String toppings2 = "Add whipped chocolate? " + estadoChocolate;
         String quantityDesplegada = "Quantity: " + cantidad;
         String precio_interno = "Total $" + precioFinal;
-        String priceMessage = name + "\n" + toppings + "\n"
+        String priceMessage = nombre + "\n" + toppings + "\n"
                 + toppings2 +"\n"  + quantityDesplegada + "\n" + precio_interno + "\nThank you!";
         return priceMessage;
     }
