@@ -11,6 +11,8 @@
         import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
         import android.view.View;
+        import android.widget.CheckBox;
+        import android.widget.Checkable;
         import android.widget.TextView;
         import java.text.NumberFormat;
 /**
@@ -80,10 +82,18 @@ public class MainActivity extends AppCompatActivity {
      *
      */
     public String createOrderSummary(int precioFinal) {
+        Boolean estadoWhipped = getCheckedState();
         String name = "Name: Kaptain Kunal";
-        String quantityDesplegada = "Quantity: 3";
+        String toppings = "Add whipped cream? " + estadoWhipped;
+        String quantityDesplegada = "Quantity: " + cantidad;
         String precio_interno = "Total $" + precioFinal;
-        String priceMessage = name + "\n" + quantityDesplegada + "\n" + precio_interno + "\nThank you!";
+        String priceMessage = name + "\n" + toppings + "\n" + quantityDesplegada + "\n" + precio_interno + "\nThank you!";
         return priceMessage;
     }
+    public boolean getCheckedState (){
+        CheckBox EstadoChecked = (CheckBox) findViewById(R.id.Whipped_cream_checkbox);
+        boolean estadoWhipped = EstadoChecked.isChecked();
+        return estadoWhipped;
+    }
+
 }
