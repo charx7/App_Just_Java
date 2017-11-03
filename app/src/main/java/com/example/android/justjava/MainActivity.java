@@ -16,6 +16,8 @@
         import android.widget.Checkable;
         import android.widget.EditText;
         import android.widget.TextView;
+        import android.widget.Toast;
+
         import java.text.NumberFormat;
 /**
  * This app displays an order form to order coffee.
@@ -60,13 +62,24 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Nuevo Metodo de incremento y decremento
      */
-    int cantidad = 0;
+    int cantidad = 1;
+
     public void increment(View view) {
-        cantidad =  cantidad + 1;
+        if (cantidad == 100) {
+            // Show an error message as a toast
+            Toast.makeText(this, "You cannot have more than 100 coffees", Toast.LENGTH_SHORT).show();
+            // Exit this method early because there's nothing left to do
+            return;
+        }
+        cantidad = cantidad + 1;
         displayQuantity(cantidad);
     }
 
     public void decrement(View view) {
+        if (cantidad == 1 ){
+            Toast.makeText(this, "Cannot order less than 1 cup of coffee", Toast.LENGTH_SHORT).show();
+            return;
+        }
         cantidad = cantidad - 1;
         displayQuantity(cantidad);
     }
