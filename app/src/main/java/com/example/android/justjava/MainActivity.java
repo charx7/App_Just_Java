@@ -8,6 +8,8 @@
  */
 
         package com.example.android.justjava;
+        import android.content.Intent;
+        import android.net.Uri;
         import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
         import android.text.Editable;
@@ -49,7 +51,25 @@ public class MainActivity extends AppCompatActivity {
     private void displayMessage(String message) {
         TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
         orderSummaryTextView.setText(message);
+        mandarCorreo(message);
     }
+
+    /**
+     *Nuevo metodo para mandar correos electrónicos
+     **/
+    public void mandarCorreo(String Mensaje) {
+        String emailAdress = "amazingcoffee@coffee.com";
+        String subject = "New Order";
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, emailAdress);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(intent.EXTRA_TEXT, Mensaje);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
 
     /**
      * This method displays the given quantity value on the screen.
